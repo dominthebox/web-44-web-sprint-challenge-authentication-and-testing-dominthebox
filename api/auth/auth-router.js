@@ -1,7 +1,17 @@
 const router = require('express').Router();
 
-router.post('/register', (req, res) => {
-  res.end('implement register, please!');
+const validatePayload = (req, res, next) => { next() }
+
+router.post('/register', validatePayload, async (req, res, next) => {
+  try {
+    const { username, password } = req.body
+    
+  } catch (err) {
+    next(err)
+  }
+  
+  
+  // res.end('implement register, please!');
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
