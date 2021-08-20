@@ -8,12 +8,10 @@ router.post('/register', validatePayload, async (req, res, next) => {
     const hash = bcrypt.hashSync(password, 8) // 2^8
     const user = { id, username, password: hash }
     const createdUser = await user
-    console.log(createdUser)
-    res.json(createdUser)
+    res.status(201).json(createdUser)
   } catch (err) {
     next(err)
   }
-  
   
   // res.end('implement register, please!');
   /*
@@ -43,8 +41,17 @@ router.post('/register', validatePayload, async (req, res, next) => {
   */
 });
 
-router.post('/login', (req, res) => {
-  res.end('implement login, please!');
+router.post('/login', validatePayload, async (req, res, next) => {
+
+  try {
+    const { username, password } = req.body
+    const existing = await
+  } catch (err) {
+    next(err)
+  }
+
+
+  // res.end('implement login, please!');
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
