@@ -1,11 +1,15 @@
 const router = require('express').Router();
-
+const bcrypt = require('bcryptjs')
 const validatePayload = (req, res, next) => { next() }
 
 router.post('/register', validatePayload, async (req, res, next) => {
   try {
-    const { username, password } = req.body
-    
+    const { id, username, password } = req.body
+    const hash = bcrypt.hashSync(password, 8) // 2^8
+    const user = { id, username, password: hash }
+    const createdUser = await user
+    console.log(createdUser)
+    res.json(createdUser)
   } catch (err) {
     next(err)
   }
